@@ -7,7 +7,7 @@ exports.processPayment = catchAsyncErrors(async (req, res, next) => {
     amount: req.body.amount,
     currency: "usd",
     metadata: {
-      company: "G10 Store",
+      company: "G101 Store",
     },
   });
 
@@ -19,3 +19,4 @@ exports.processPayment = catchAsyncErrors(async (req, res, next) => {
 exports.sendStripeApiKey = catchAsyncErrors(async (req, res, next) => {
   res.status(200).json({ stripeApiKey: process.env.STRIPE_API_KEY });
 });
+

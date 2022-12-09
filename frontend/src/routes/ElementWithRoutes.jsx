@@ -33,6 +33,8 @@ import ProcessOrder from "../pages/admin/ProcessOrder";
 import UserList from "../pages/admin/UserList";
 import UpdateUser from "../pages/admin/UpdateUser";
 import ProductReviews from "../pages/admin/ProductReviews";
+import Policy from "../components/layout/Footer/Policy";
+import WarrantyPolicy from "../components/layout/Footer/WarrantyPolicy"
 
 const ElementWithRoutes = ({ stripeApiKey }) => {
   // const { isAuthenticated } = useSelector((state) => state.user);
@@ -47,6 +49,8 @@ const ElementWithRoutes = ({ stripeApiKey }) => {
           <Route path="/products/:keyword" element={<Products />} />
           <Route path="/aboutus" element={<AboutUs />} />
           <Route path="/contactus" element={<ContactUs />} />
+          <Route path="/policy" element={<Policy/>} />
+          <Route path="/WarrantyPolicy" element={<WarrantyPolicy/>} />
           <Route path="/search" element={<SearchProducts />} />
           <Route path="/login" element={<LoginSignUp />} />
           <Route path="/password/forgot" element={<ForgotPassword />} />

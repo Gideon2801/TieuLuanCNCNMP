@@ -30,7 +30,7 @@ const HomePage = () => {
         <Loader />
       ) : (
         <Fragment>
-          <MetaData title="G10Store" />
+          <MetaData title="G101Store" />
 
           {/* banner */}
           <Banner jsonData={companydata} />

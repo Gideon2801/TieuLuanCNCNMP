@@ -1,7 +1,7 @@
-import { useRef } from 'react';
-import emailjs from '@emailjs/browser';
-import { FaMapMarkerAlt, FaPhoneAlt, FaMailBulk } from 'react-icons/fa';
-import { useAlert } from 'react-alert';
+import { useRef } from "react";
+import emailjs from "@emailjs/browser";
+import { FaMapMarkerAlt, FaPhoneAlt, FaMailBulk } from "react-icons/fa";
+import { useAlert } from "react-alert";
 
 const ContactUs = () => {
   const form = useRef();
@@ -11,10 +11,10 @@ const ContactUs = () => {
 
     emailjs
       .sendForm(
-        'service_me25ldc',
-        'template_o4pqlrq',
+        "service_jrrzssf",
+        "template_jmgmnuj",
         form.current,
-        'nF2Cccjtnog8lNxlG'
+        "wj1KVPLMC5fGuwGhv"
       )
       .then(
         (result) => {
@@ -25,7 +25,7 @@ const ContactUs = () => {
         }
       );
     e.target.reset();
-    alert.success('Gửi tin nhắn thành công');
+    alert.success("Gửi tin nhắn thành công");
   };
   return (
     <div className="">
@@ -35,24 +35,25 @@ const ContactUs = () => {
             Thông tin liên lạc
           </h1>
         </div>
-        <div className="flex lg:flex-row md:flex-col sm:flex-col xs:flex-col p-8 justify-around text-lightGray w-[100%] text-lg">
+        <div className="flex lg:flex-row md:flex-col sm:flex-col xs:flex-col p-2 justify-around text-lightGray w-[100%] text-lg">
           <div className="xl:w-[30%] lg:w-[30%] md:w-[100%] sm:w-[100%] mx-3">
             {/* place */}
             <div className="py-4 sm:p-0 flex lg:flex-row sm:flex-wrap items-center">
               <div className="pr-2">
                 <FaMapMarkerAlt className="h-8" />
-              </div>
-              <div>
+                <p>
                 01 đường Võ Văn Ngân, phường Linh Chiểu, thành phố Thủ Đức,
                 thành phố Hồ Chí Minh
+                </p>
               </div>
+              
             </div>
             {/* phone */}
             <div className="py-4 sm:p-0 flex flex-wrap items-center">
               <div className="pr-2">
                 <FaPhoneAlt className="h-8" />
               </div>
-              <div>0965809465</div>
+              <div>0352610224</div>
             </div>
             {/* email */}
             <div className="py-4 sm:p-0 sm:pb-5 flex flex-wrap items-center">
@@ -60,7 +61,7 @@ const ContactUs = () => {
                 <FaMailBulk className="h-8" />
               </div>
               <a href="mailto:groupcnpmmernstack@gmail.com">
-                mernstore.k19@gmail.com
+                groupcnpmmernstack@gmail.com
               </a>
             </div>
           </div>

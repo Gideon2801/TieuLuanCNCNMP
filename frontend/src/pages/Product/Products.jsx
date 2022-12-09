@@ -57,7 +57,7 @@ const Products = () => {
         <Loader />
       ) : (
         <Fragment>
-          <MetaData title={`Sản phẩm | G10Store`} />
+          <MetaData title={`Sản phẩm | G101Store`} />
           <div className="h-auto w-[100%] py-24 md:px-10 ">
             <h1 className="headingStyle">
               <div className="headingStylesDiv" />

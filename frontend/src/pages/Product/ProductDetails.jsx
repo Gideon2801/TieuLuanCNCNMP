@@ -105,7 +105,7 @@ const ProductDetails = () => {
         <Loader />
       ) : (
         <div className="w-full py-24 px-8 sm:15 md:px-24 flex flex-col md:flex-row justify-center bg-secColor">
-          <MetaData title={`${product.name} | G10Store`} />
+          <MetaData title={`${product.name} | G101Store`} />
           <div className="w-full flex justify-center md:w-1/2 md:p-10 overflow-hidden ">
             <MgSlider
               width="400px"

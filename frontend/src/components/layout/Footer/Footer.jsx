@@ -21,10 +21,10 @@ const Footer = ({ jsonData }) => {
           </p>
         </div>
 
-        <div className="md:w-1/6 p-10">
+        <div className="md:w-1/5 p-10">
           <FooterContent
-            title={heading.technical}
-            data={footerData.technical}
+            title={heading.policy}
+            data={footerData.policy}
             disabled
           />
         </div>
@@ -46,9 +46,8 @@ const Footer = ({ jsonData }) => {
       <div className="bg-primaryDarkBlue py-5 px-8 md:px-24 flex flex-col md:flex-row items-center justify-center">
         <div>
           <p className="text-lightGray tracking-wider text-sm text-center">
-            Copyright &copy; 2022 by{" "}
-            <span className="text-primaryBlue"> {footerData.companyName}</span>.
-            All Right Reserved
+          ĐT: 035 261 0224 - Email: groupcnpmmernstack@gmail.com
+          
           </p>
         </div>
       </div>

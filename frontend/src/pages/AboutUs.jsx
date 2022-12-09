@@ -9,21 +9,15 @@ const AboutUs = () => {
             Vai trò và sứ mệnh
           </h1>
           <p class="mt-5 text-lightGray mx-10 text-justify leading-6">
-            <strong>G10Store</strong> là công ty chuyên cung cấp các sản phẩm về
+            <strong>G101Store</strong> là công ty chuyên cung cấp các sản phẩm về
             công nghệ như Laptop, PC, phụ kiện PC hàng đầu hiện nay.
             <br />
             <br />
-            Là sản phẩm đầu tay cũng như là đứa con tinh thần của cả nhóm 10
+            Là sản phẩm đầu tay cũng như là đứa con tinh thần của cả nhóm
             <br />
+            
             <br />
-            Các thành viên sáng lập:
-            <ul className="list-disc pl-4">
-              <li>Lưu Ngạn Lâm</li>
-              <li>Võ Bảo Long</li>
-              <li>Đỗ Minh Quân</li>
-            </ul>
-            <br />
-            Sứ mệnh của G0Store là sẽ cũng cố hơn nữa về mặt kỹ thuật để có thể
+            Sứ mệnh của G101Store là sẽ cũng cố hơn nữa về mặt kỹ thuật để có thể
             đưa nào hoạt động rộng rãi và chính thức
           </p>
         </div>
