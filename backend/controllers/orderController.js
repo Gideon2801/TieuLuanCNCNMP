@@ -102,6 +102,12 @@ exports.updateOrder = catchAsyncErrors(async (req, res, next) => {
 
   if (req.body.status === 'Delivered') {
     order.deliveredAt = Date.now();
+    if (!order.paymentInfo)
+    {
+      const paymentInfo = { id: req.params.id, status: 'succeeded' };
+      order.paymentInfo = paymentInfo;
+    }
+
   }
 
   if (req.body.status === 'Cancel') {
