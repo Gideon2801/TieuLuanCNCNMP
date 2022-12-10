@@ -1,23 +1,23 @@
-import React, { useEffect, useState, useRef, Fragment } from "react";
-import CheckoutSteps from "../../components/shipping/CheckoutSteps";
-import { useSelector, useDispatch } from "react-redux";
-import MetaData from "../../components/layout/MetaData";
-import { useAlert } from "react-alert";
+import React, { useEffect, useState, useRef, Fragment } from 'react';
+import CheckoutSteps from '../../components/shipping/CheckoutSteps';
+import { useSelector, useDispatch } from 'react-redux';
+import MetaData from '../../components/layout/MetaData';
+import { useAlert } from 'react-alert';
 import {
   CardNumberElement,
   CardCvcElement,
   CardExpiryElement,
   useStripe,
   useElements,
-} from "@stripe/react-stripe-js";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import { CreditCard, Event, VpnKey } from "@material-ui/icons";
-import { createOrder, clearErrors } from "../../actions/orderAction";
-import { resetCart } from "../../actions/cartAction";
+} from '@stripe/react-stripe-js';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { CreditCard, Event, VpnKey } from '@material-ui/icons';
+import { createOrder, clearErrors } from '../../actions/orderAction';
+import { resetCart } from '../../actions/cartAction';
 
 const Payment = () => {
-  const orderInfo = JSON.parse(sessionStorage.getItem("orderInfo"));
+  const orderInfo = JSON.parse(sessionStorage.getItem('orderInfo'));
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const payBtn = useRef(null);
@@ -51,13 +51,13 @@ const Payment = () => {
     try {
       const config = {
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
           Authorization: `Bearer ${process.env.REACT_APP_STRIPE_SECRET_KEY}`,
         },
       };
 
       const { data } = await axios.post(
-        "/api/v1/payment/process",
+        '/api/v1/payment/process',
         paymentData,
         config
       );
@@ -84,14 +84,14 @@ const Payment = () => {
         payBtn.current.disabled = false;
         alert.error(result.error.message);
       } else {
-        if (result.paymentIntent.status === "succeeded") {
+        if (result.paymentIntent.status === 'succeeded') {
           // creating order when payment is success
           order.paymentInfo = {
             id: result.paymentIntent.id,
             status: result.paymentIntent.status,
           };
           dispatch(createOrder(order));
-          navigate("/success", { replace: true });
+          navigate('/success', { replace: true });
           dispatch(resetCart());
           setLoading(false);
         } else {
@@ -102,6 +102,20 @@ const Payment = () => {
       payBtn.current.disable = false;
       alert.error(err.response.data.message);
     }
+  };
+
+  const submitWithoutPay = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    order.paymentInfo = {
+      id: order.id,
+      status: 'Unpaid',
+    };
+    dispatch(createOrder(order));
+    navigate('/success', { replace: true });
+    dispatch(resetCart());
+    setLoading(false);
   };
 
   // const paymentHandler = async () => {
@@ -156,6 +170,18 @@ const Payment = () => {
             />
           </form>
         </div>
+        <div className="w-full md:w-[30%] mx-auto">
+            <form className="flex flex-col gap-5"
+            onSubmit={(e) => submitWithoutPay(e)}>
+              <input
+                // onClick={dispatch(resetCart())}
+                className="slideableBtnStyles cursor-pointer"
+                type="submit"
+                disabled={loading ? true : false}
+                value={'Thanh toán khi nhận hàng'}
+              />
+            </form>
+          </div>
       </div>
     </Fragment>
   );

@@ -1,11 +1,13 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import MetaData from "../../components/layout/MetaData";
 import { Link, useParams } from "react-router-dom";
-import { getOrderDetails, clearErrors } from "../../actions/orderAction";
+import { getOrderDetails, clearErrors, cancelOrder } from "../../actions/orderAction";
 import Loader from "../../components/layout/Loader/Loader";
 import { useAlert } from "react-alert";
 import { dolaSymbol } from "../../constants/constants";
+import Button from '../../components/user/Button';
+import { UPDATE_ORDER_RESET } from '../../constants/orderConstants';
 
 const OrderDetails = () => {
   const dispatch = useDispatch();
@@ -13,14 +15,41 @@ const OrderDetails = () => {
   const alert = useAlert();
   const params = useParams();
 
+  const {
+    error: updateError,
+    isUpdated,
+  } = useSelector((state) => state.order);
+
+  const [status, setStatus] = useState('Cancel');
+
+  const updateStatussOrder = (e) => {
+    e.preventDefault();
+
+    const myForm = new FormData();
+
+    myForm.set('status', status);
+
+    dispatch(cancelOrder(params.id, myForm));
+  };
+  
   useEffect(() => {
     if (error) {
       alert.error(error);
       dispatch(clearErrors());
     }
 
+    if (updateError) {
+      alert.error(updateError);
+      dispatch(clearErrors());
+    }
+
+    if (isUpdated) {
+      alert.success('Cập nhật trạng thái đơn hàng thành công');
+      dispatch({ type: UPDATE_ORDER_RESET });
+    }
+
     dispatch(getOrderDetails(params.id));
-  }, [alert, dispatch, error, params.id]);
+  }, [alert, dispatch, error, isUpdated, updateError, params.id]);
 
   return (
     <Fragment>
@@ -72,7 +101,7 @@ const OrderDetails = () => {
                       {order.paymentInfo &&
                       order.paymentInfo.status === "succeeded"
                         ? "Đã thanh toán"
-                        : "Chua thanh toán"}
+                        : "Chưa thanh toán"}
                     </p>
                   </div>
 
@@ -103,6 +132,8 @@ const OrderDetails = () => {
                           ? "Đã giao hàng"
                           : order.orderStatus === "Shipped"
                           ? "Đang vận chuyển"
+                          : order.orderStatus === "Cancel"
+                          ? "Đã hủy"
                           : "Đang xử lí"}
                       </p>
                     </p>
@@ -147,6 +178,13 @@ const OrderDetails = () => {
               </div>
             </div>
           </div>
+          {order.orderStatus == 'Processing' && (
+            <form onSubmit={updateStatussOrder}>
+              <Button id="btn-signup" label="Hủy đơn hàng"
+            />
+            </form>
+           
+          )}
         </Fragment>
       )}
     </Fragment>

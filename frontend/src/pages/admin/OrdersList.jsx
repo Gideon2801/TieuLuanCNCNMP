@@ -118,6 +118,8 @@ const OrdersList = () => {
             ? "Đã giao hàng"
             : order.orderStatus === "Shipped"
             ? "Đang vận chuyển"
+            : order.orderStatus === "Cancel"
+            ? "Đã hủy"
             : "Đang xử lí",
         amount: order.totalPrice,
       });
