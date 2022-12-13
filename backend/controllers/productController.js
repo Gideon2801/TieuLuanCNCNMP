@@ -1,14 +1,14 @@
-const Product = require("../models/productModel");
-const ErrorHandler = require("../utils/errorHandler");
-const catchAsyncErrors = require("../middleware/catchAsyncErrors");
-const ApiFeatures = require("../utils/apifeatures");
-const cloudinary = require("cloudinary");
+const Product = require('../models/productModel');
+const ErrorHandler = require('../utils/errorHandler');
+const catchAsyncErrors = require('../middleware/catchAsyncErrors');
+const ApiFeatures = require('../utils/apifeatures');
+const cloudinary = require('cloudinary');
 
 // Create product -- by Admin
 exports.createProduct = catchAsyncErrors(async (req, res, next) => {
   let images = [];
 
-  if (typeof req.body.images === "string") {
+  if (typeof req.body.images === 'string') {
     images.push(req.body.images);
   } else {
     images = req.body.images;
@@ -18,7 +18,7 @@ exports.createProduct = catchAsyncErrors(async (req, res, next) => {
 
   for (let i = 0; i < images.length; i++) {
     const result = await cloudinary.v2.uploader.upload(images[i], {
-      folder: "products",
+      folder: 'products',
     });
 
     imagesLinks.push({
@@ -34,7 +34,7 @@ exports.createProduct = catchAsyncErrors(async (req, res, next) => {
 
   res.status(201).json({
     success: true,
-    message: "posting",
+    message: 'posting',
     product,
   });
 });
@@ -42,48 +42,40 @@ exports.createProduct = catchAsyncErrors(async (req, res, next) => {
 // update products -- Admin
 exports.updateProduct = catchAsyncErrors(async (req, res, next) => {
   let product = await Product.findById(req.params.id);
-
   if (!product) {
-    return next(new ErrorHandler("Không tìm thấy sản phẩm", 404));
+    return next(new ErrorHandler('Không tìm thấy sản phẩm', 404));
   }
-
   // Images Start Here
   let images = [];
 
-  if (typeof req.body.images === "string") {
+  if (typeof req.body.images === 'string') {
     images.push(req.body.images);
   } else {
     images = req.body.images;
   }
-
   if (images !== undefined) {
     // Delete Images From Cloudinary
     for (let i = 0; i < product.images.length; i++) {
       await cloudinary.v2.uploader.destroy(product.images[i].public_id);
     }
-
     const imagesLinks = [];
 
     for (let i = 0; i < images.length; i++) {
       const result = await cloudinary.v2.uploader.upload(images[i], {
-        folder: "products",
+        folder: 'products',
       });
-
       imagesLinks.push({
         public_id: result.public_id,
         url: result.secure_url,
       });
     }
-
     req.body.images = imagesLinks;
   }
-
   product = await Product.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
     runValidators: true,
     useFindAndModify: false,
   });
-
   res.status(200).json({
     success: true,
     product,
@@ -94,7 +86,7 @@ exports.deleteProduct = catchAsyncErrors(async (req, res, next) => {
   const product = await Product.findById(req.params.id);
 
   if (!product) {
-    return next(new ErrorHandler("Không tìm thấy sản phẩm", 404));
+    return next(new ErrorHandler('Không tìm thấy sản phẩm', 404));
   }
 
   // delete images from cloudinary
@@ -105,7 +97,7 @@ exports.deleteProduct = catchAsyncErrors(async (req, res, next) => {
   await product.remove();
   res.status(200).json({
     success: true,
-    message: "Xoá sản phẩm thành công",
+    message: 'Xoá sản phẩm thành công',
   });
 });
 
@@ -114,7 +106,7 @@ exports.getProductDetails = catchAsyncErrors(async (req, res, next) => {
   const product = await Product.findById(req.params.id);
 
   if (!product) {
-    return next(new ErrorHandler("Không tìm thấy sản phẩm!", 404));
+    return next(new ErrorHandler('Không tìm thấy sản phẩm!', 404));
   }
 
   res.status(200).json({
@@ -204,7 +196,7 @@ exports.getProductReviews = catchAsyncErrors(async (req, res, next) => {
   const product = await Product.findById(req.query.id);
 
   if (!product) {
-    return next(new ErrorHandler("Không tìm thấy sản phẩm!", 404));
+    return next(new ErrorHandler('Không tìm thấy sản phẩm!', 404));
   }
 
   res.status(200).json({
@@ -218,7 +210,7 @@ exports.deleteReview = catchAsyncErrors(async (req, res, next) => {
   const product = await Product.findById(req.query.productId);
 
   if (!product) {
-    return next(new ErrorHandler("Không tìm thấy sản phẩm!", 404));
+    return next(new ErrorHandler('Không tìm thấy sản phẩm!', 404));
   }
 
   const reviews = product.reviews.filter(

@@ -165,7 +165,7 @@ const Payment = () => {
               value={
                 loading
                   ? `Processing...`
-                  : `Thanh toán - ${orderInfo && orderInfo.totalPrice}`
+                  : `Thanh toán - ${orderInfo && orderInfo.totalPrice} ₫`
               }
             />
           </form>

@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 import MetaData from "../../components/layout/MetaData";
 import { Link, useNavigate } from "react-router-dom";
 import CheckoutSteps from "../../components/shipping/CheckoutSteps";
-import { dolaSymbol } from "../../constants/constants";
 import SlideableBtn from "../../components/layout/Buttons/SlideableBtn";
 
 const ConfirmOrder = () => {
@@ -89,11 +88,10 @@ const ConfirmOrder = () => {
                             {item.name}
                           </Link>
                           <span>
-                            {item.quantity} X {dolaSymbol}
-                            {item.price} =
+                            {item.quantity} X 
+                            {item.price} ₫ =
                             <b>
-                              {dolaSymbol}
-                              {item.price * item.quantity}
+                              {item.price * item.quantity} ₫
                             </b>
                           </span>
                         </div>
@@ -112,11 +110,11 @@ const ConfirmOrder = () => {
                   <div className="flex flex-col gap-5 my-3">
                     <div className="flex justify-between">
                       <p>Tổng: </p>
-                      <span className="text-slate-500">{`${dolaSymbol}${subtotal}`}</span>
+                      <span className="text-slate-500">{`${subtotal} ₫`}</span>
                     </div>
                     <div className="flex justify-between">
                       <p>Phí vận chuyển: </p>
-                      <span className="text-slate-500">{`${dolaSymbol}${shippingCharges}`}</span>
+                      <span className="text-slate-500">{`${shippingCharges} ₫`}</span>
                     </div>
                   </div>
 
@@ -125,8 +123,7 @@ const ConfirmOrder = () => {
                       <b>Tổng: </b>
                     </p>
                     <span className="font-bold">
-                      {dolaSymbol}
-                      {totalPrice}
+                      {totalPrice} ₫
                     </span>
                   </div>
 

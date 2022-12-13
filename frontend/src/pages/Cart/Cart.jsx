@@ -93,9 +93,9 @@ const Cart = () => {
                       />
                     </div>
                     <div className="flex justify-end items-center">
-                      <p className="font-medium">{`$${
+                      <p className="font-medium">{`${
                         item.price * item.quantity
-                      }`}</p>
+                      } ₫`}</p>
                     </div>
                   </div>
                 );
@@ -113,12 +113,12 @@ const Cart = () => {
               <div className="grid place-items-end w-[90%] mx-auto flex ">
                 <div className="flex justify-between px-5 py-5 border-t-4 border-primaryDarkBlue w-full md:w-1/2 lg:w-1/3 ">
                   <p className="font-bold text-[1.2em] ">Thành tiền</p>
-                  <p className="font-bold text-[1em]">{`$
+                  <p className="font-bold text-[1em]">{`
                   ${cartItems.reduce(
                     (acc, item) => acc + item.quantity * item.price,
                     0
                   )}
-                `}</p>
+                  ₫`}</p>
                 </div>
                 <div className="px-5 w-full md:w-1/2 lg:w-1/5">
                   <button

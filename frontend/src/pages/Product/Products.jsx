@@ -28,7 +28,7 @@ const Products = () => {
   const { loading, error, products, productsCount, resultPerPage } =
     useSelector((state) => state.products);
 
-  const [price, setPrice] = useState([0, 5000]);
+  const [price, setPrice] = useState([0, 50000000]);
   const [category, setCategory] = useState("");
   const [ratings, setRatings] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);

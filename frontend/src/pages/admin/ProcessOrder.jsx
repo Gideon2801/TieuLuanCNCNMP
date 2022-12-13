@@ -4,7 +4,6 @@ import MetaData from '../../components/layout/MetaData';
 import { Link, useParams } from 'react-router-dom';
 import SideBar from '../../components/admin/Sidebar';
 import { useAlert } from 'react-alert';
-import { dolaSymbol } from '../../constants/constants';
 import {
   getOrderDetails,
   clearErrors,
@@ -126,8 +125,7 @@ const ProcessOrder = () => {
                       <div className="flex gap-3">
                         <p>Số tiền: </p>
                         <span className="text-slate-600">
-                          {dolaSymbol}
-                          {order.totalPrice && order.totalPrice}
+                          {order.totalPrice && order.totalPrice} ₫
                         </span>
                       </div>
                     </div>
@@ -182,11 +180,10 @@ const ProcessOrder = () => {
                               {item.name}
                             </Link>
                             <span>
-                              {item.quantity} X {dolaSymbol}
-                              {item.price} ={' '}
+                              {item.quantity} X 
+                              {item.price} ₫ ={' '}
                               <b>
-                                {dolaSymbol}
-                                {item.price * item.quantity}
+                                {item.price * item.quantity} ₫
                               </b>
                             </span>
                           </div>

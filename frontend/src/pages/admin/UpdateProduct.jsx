@@ -13,7 +13,7 @@ import {
   Description,
   Storage,
   Spellcheck,
-  AttachMoney,
+  Money,
 } from "@material-ui/icons";
 import SideBar from "../../components/admin/Sidebar";
 import { UPDATE_PRODUCT_RESET } from "../../constants/productConstants";
@@ -168,7 +168,7 @@ const UpdateProduct = () => {
                   type="number"
                   name="price"
                   placeholder="Vui lòng nhập giá sản phẩm"
-                  Icon={AttachMoney}
+                  Icon={Money}
                   value={price}
                   onChange={(e) => setPrice(e.target.value)}
                 />

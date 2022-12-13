@@ -14,7 +14,7 @@ const ProductCard = ({ product }) => {
     <Link
       to={`/product/${product._id}`}
       className="flex flex-col justify-between w-60 h-[400px] m-auto rounded-lg shadow-xl bg-secColor overflow-hidden md:hover:shadow-xl transition-all duration-300 md:hover:scale-105 group decoration-transparent"
-      title={`Name: ${product.name} \nPrice: $${product.price} \nRating: ${product.ratings} ★`}
+      title={`Name: ${product.name} \nPrice: ${product.price} ₫ \nRating: ${product.ratings} ★`}
     >
       <div className="h-fit overflow-hidden p-2">
         <img

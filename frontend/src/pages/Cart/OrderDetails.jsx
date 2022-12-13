@@ -5,7 +5,6 @@ import { Link, useParams } from "react-router-dom";
 import { getOrderDetails, clearErrors, cancelOrder } from "../../actions/orderAction";
 import Loader from "../../components/layout/Loader/Loader";
 import { useAlert } from "react-alert";
-import { dolaSymbol } from "../../constants/constants";
 import Button from '../../components/user/Button';
 import { UPDATE_ORDER_RESET } from '../../constants/orderConstants';
 
@@ -108,8 +107,7 @@ const OrderDetails = () => {
                   <div className="flex gap-3">
                     <p>Số tiền: </p>
                     <span className="text-slate-600">
-                      {dolaSymbol}
-                      {order.totalPrice && order.totalPrice}
+                      {order.totalPrice && order.totalPrice} ₫
                     </span>
                   </div>
                 </div>
@@ -164,11 +162,10 @@ const OrderDetails = () => {
                             {item.name}
                           </Link>
                           <span>
-                            {item.quantity} X {dolaSymbol}
-                            {item.price} ={" "}
+                            {item.quantity} X
+                            {item.price} ₫ ={" "}
                             <b>
-                              {dolaSymbol}
-                              {item.price * item.quantity}
+                              {item.price * item.quantity} ₫
                             </b>
                           </span>
                         </div>

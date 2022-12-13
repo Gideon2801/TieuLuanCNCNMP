@@ -35,7 +35,7 @@ const LoginSignUp = () => {
 
   const [avatar, setAvatar] = useState("/profile.png");
   const [avatarPreview, setAvatarPreview] = useState(
-    "https://res.cloudinary.com/baolong317/image/upload/v1669743696/avatars/gbgy5z5ovkkl85tgydeu.png"
+    "https://res.cloudinary.com/dnadibjp0/image/upload/v1670951747/users/download_fdsjrx.png"
   );
 
   const [registerName, setRegisterName] = useState("");
