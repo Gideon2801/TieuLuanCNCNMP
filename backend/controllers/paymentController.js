@@ -30,7 +30,7 @@ exports.processPayment = catchAsyncErrors(async (req, res, next) => {
     .status(200)
     .json({
       success: true,
-      message: `Bạn đã thanh toán thành công số tiền ${amount} ₫ tương đương $${Math.floor(
+      message: `Bạn đã thanh toán thành công số tiền ${(amount).toLocaleString()} VND tương đương $${Math.floor(
         result.result
       )}`,
       client_secret: myPayment.client_secret,

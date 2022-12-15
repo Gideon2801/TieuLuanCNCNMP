@@ -9,6 +9,7 @@ import { CategoryScale } from "chart.js";
 import { getAdminProducts } from "../../actions/productAction";
 import { getAllOrders } from "../../actions/orderAction";
 import { getAllUsers } from "../../actions/userAction";
+import CurrencyFormat from 'react-currency-format';
 
 const Dashboard = () => {
   const dispatch = useDispatch();
@@ -89,9 +90,9 @@ const Dashboard = () => {
         <div className="pt-10">
           <div className="text-center text-xl py-5 text-white font-medium bg-secondaryDark">
             <p>
-              Tổng doanh thu <br /> 
-              {totalAmount} ₫
+              Tổng doanh thu
             </p>
+            <CurrencyFormat value={totalAmount} displayType={'text'} thousandSeparator={true} renderText={value => <div>{value} VND</div>} />         
           </div>
 
           {/* dashboardSummaryBox2 */}

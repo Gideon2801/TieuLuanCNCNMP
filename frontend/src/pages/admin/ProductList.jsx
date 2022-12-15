@@ -110,7 +110,7 @@ const ProductList = () => {
       rows.push({
         id: item._id,
         stock: item.stock,
-        price: `${item.price} ₫`,
+        price: `${(item.price).toLocaleString()} VND`,
         name: item.name,
       });
     });

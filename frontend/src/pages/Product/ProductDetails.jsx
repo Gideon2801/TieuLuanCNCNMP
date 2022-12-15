@@ -1,27 +1,28 @@
-import React, { Fragment, useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React, { Fragment, useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import {
   clearErrors,
   getProductDetails,
   newReview,
-} from "../../actions/productAction";
-import { useParams } from "react-router-dom";
-import { useAlert } from "react-alert";
-import ReviewCard from "../../components/home/ReviewCard/ReviewCard";
-import MetaData from "../../components/layout/MetaData";
-import { addItemsToCart } from "../../actions/cartAction";
-import Loader from "../../components/layout/Loader/Loader";
-import QuantityCardInput from "../../components/Cart/QuantityCardInput";
+} from '../../actions/productAction';
+import { useParams } from 'react-router-dom';
+import { useAlert } from 'react-alert';
+import ReviewCard from '../../components/home/ReviewCard/ReviewCard';
+import MetaData from '../../components/layout/MetaData';
+import { addItemsToCart } from '../../actions/cartAction';
+import Loader from '../../components/layout/Loader/Loader';
+import QuantityCardInput from '../../components/Cart/QuantityCardInput';
 import {
   Dialog,
   DialogActions,
   DialogContent,
   DialogTitle,
   Button,
-} from "@material-ui/core";
-import { Rating } from "@material-ui/lab";
-import { NEW_REVIEW_RESET } from "../../constants/productConstants";
-import MgSlider from "../../components/Products/MgSlider";
+} from '@material-ui/core';
+import { Rating } from '@material-ui/lab';
+import { NEW_REVIEW_RESET } from '../../constants/productConstants';
+import MgSlider from '../../components/Products/MgSlider';
+import CurrencyFormat from 'react-currency-format';
 
 const ProductDetails = () => {
   const dispatch = useDispatch();
@@ -31,7 +32,7 @@ const ProductDetails = () => {
 
   const [open, setOpen] = useState(false);
   const [rating, setRating] = useState(5);
-  const [comment, setComment] = useState("");
+  const [comment, setComment] = useState('');
 
   const { product, loading, error } = useSelector(
     (state) => state.productDetails
@@ -44,7 +45,7 @@ const ProductDetails = () => {
   const [quantity, setQuantity] = useState(1);
 
   const options = {
-    size: "large",
+    size: 'large',
     value: product.ratings,
     readOnly: true,
     precision: 0.5,
@@ -62,7 +63,7 @@ const ProductDetails = () => {
     }
 
     if (success) {
-      alert.success("Đánh giá thành công");
+      alert.success('Đánh giá thành công');
       dispatch({ type: NEW_REVIEW_RESET });
     }
     dispatch(getProductDetails(id));
@@ -80,7 +81,7 @@ const ProductDetails = () => {
 
   const addToCartHandler = () => {
     dispatch(addItemsToCart(id, quantity));
-    alert.success("Thêm giỏ hàng thành công");
+    alert.success('Thêm giỏ hàng thành công');
   };
 
   const submitReviewToggle = () => {
@@ -90,9 +91,9 @@ const ProductDetails = () => {
   const reviewSubmitHandler = () => {
     const myForm = new FormData();
 
-    myForm.set("rating", rating);
-    myForm.set("comment", comment);
-    myForm.set("productId", id);
+    myForm.set('rating', rating);
+    myForm.set('comment', comment);
+    myForm.set('productId', id);
 
     dispatch(newReview(myForm));
 
@@ -135,7 +136,14 @@ const ProductDetails = () => {
             </div>
 
             <div>
-              <h1 className="text-2xl font-bold text-primaryDarkBlue text-center md:text-left">{`${product.price} ₫`}</h1>
+              <h1 className="text-2xl font-bold text-primaryDarkBlue text-center md:text-left">
+                <CurrencyFormat
+                  value={product.price}
+                  displayType={'text'}
+                  thousandSeparator={true}
+                  renderText={(value) => <div>{value} VND</div>}
+                />
+              </h1>
 
               <div className="flex gap-5 my-5 flex-col md:flex-row justify-center md:justify-start">
                 <QuantityCardInput
@@ -154,13 +162,13 @@ const ProductDetails = () => {
               </div>
 
               <p className="border-t-2 border-b-2 py-3 border-slate-300 text-slate-600 font-semibold text-center md:text-left">
-                Trạng thái:{" "}
+                Trạng thái:{' '}
                 <b
                   className={`${
-                    product.stock < 1 ? "text-red-500" : "text-green-500"
+                    product.stock < 1 ? 'text-red-500' : 'text-green-500'
                   }`}
                 >
-                  {product.stock < 1 ? "Hết hàng" : "Trong kho"} -
+                  {product.stock < 1 ? 'Hết hàng' : 'Trong kho'} -
                   {product.stock} sản phẩm
                 </b>
               </p>

@@ -13,6 +13,7 @@ import Loader from '../../components/layout/Loader/Loader';
 import Button from '../../components/user/Button';
 import { AccountTree } from '@material-ui/icons';
 import { UPDATE_ORDER_RESET } from '../../constants/orderConstants';
+import CurrencyFormat from 'react-currency-format';
 
 const ProcessOrder = () => {
   const alert = useAlert();
@@ -124,8 +125,9 @@ const ProcessOrder = () => {
 
                       <div className="flex gap-3">
                         <p>Số tiền: </p>
+                        
                         <span className="text-slate-600">
-                          {order.totalPrice && order.totalPrice} ₫
+                          {order.totalPrice && <CurrencyFormat value={order.totalPrice} displayType={'text'} thousandSeparator={true} renderText={value => <div>{value} VND</div>} />} 
                         </span>
                       </div>
                     </div>
@@ -179,12 +181,14 @@ const ProcessOrder = () => {
                             >
                               {item.name}
                             </Link>
-                            <span>
-                              {item.quantity} X 
-                              {item.price} ₫ ={' '}
+                            <span>                               
+                              <CurrencyFormat value={item.price} displayType={'text'} thousandSeparator={true} renderText={value => 
+                              <div>{item.quantity} X {value}  ={' '}
                               <b>
-                                {item.price * item.quantity} ₫
-                              </b>
+                              <CurrencyFormat value={item.price * item.quantity} displayType={'text'} thousandSeparator={true} renderText={value => <div>{value} VND</div>} />         
+                              </b>                              
+                              </div>} />         
+                              
                             </span>
                           </div>
                         );

@@ -4,6 +4,7 @@ import MetaData from "../../components/layout/MetaData";
 import { Link, useNavigate } from "react-router-dom";
 import CheckoutSteps from "../../components/shipping/CheckoutSteps";
 import SlideableBtn from "../../components/layout/Buttons/SlideableBtn";
+import CurrencyFormat from 'react-currency-format';
 
 const ConfirmOrder = () => {
   const navigate = useNavigate();
@@ -87,13 +88,15 @@ const ConfirmOrder = () => {
                           >
                             {item.name}
                           </Link>
-                          <span>
-                            {item.quantity} X 
-                            {item.price} ₫ =
-                            <b>
-                              {item.price * item.quantity} ₫
-                            </b>
-                          </span>
+                          <span>                               
+                              <CurrencyFormat value={item.price} displayType={'text'} thousandSeparator={true} renderText={value => 
+                              <div>{item.quantity} X {value}  ={' '}
+                              <b>
+                              <CurrencyFormat value={item.price * item.quantity} displayType={'text'} thousandSeparator={true} renderText={value => <div>{value} VND</div>} />         
+                              </b>                              
+                              </div>} />         
+                              
+                            </span>
                         </div>
                       );
                     })}
@@ -110,11 +113,11 @@ const ConfirmOrder = () => {
                   <div className="flex flex-col gap-5 my-3">
                     <div className="flex justify-between">
                       <p>Tổng: </p>
-                      <span className="text-slate-500">{`${subtotal} ₫`}</span>
+                      <CurrencyFormat value={subtotal} displayType={'text'} thousandSeparator={true} renderText={value => <div>{value} VND</div>} />       
                     </div>
                     <div className="flex justify-between">
                       <p>Phí vận chuyển: </p>
-                      <span className="text-slate-500">{`${shippingCharges} ₫`}</span>
+                      <CurrencyFormat value={shippingCharges} displayType={'text'} thousandSeparator={true} renderText={value => <div>{value} VND</div>} />       
                     </div>
                   </div>
 
@@ -122,9 +125,7 @@ const ConfirmOrder = () => {
                     <p>
                       <b>Tổng: </b>
                     </p>
-                    <span className="font-bold">
-                      {totalPrice} ₫
-                    </span>
+                    <CurrencyFormat value={totalPrice} displayType={'text'} thousandSeparator={true} renderText={value => <div> <b>{value} VND</b> </div>} />       
                   </div>
 
                   <SlideableBtn onClick={proceedToPayment} label="Tiếp tục" />

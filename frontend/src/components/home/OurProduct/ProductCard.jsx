@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Rating } from "@material-ui/lab";
+import CurrencyFormat from 'react-currency-format';
 
 const ProductCard = ({ product }) => {
   const options = {
@@ -14,7 +15,7 @@ const ProductCard = ({ product }) => {
     <Link
       to={`/product/${product._id}`}
       className="flex flex-col justify-between w-60 h-[400px] m-auto rounded-lg shadow-xl bg-secColor overflow-hidden md:hover:shadow-xl transition-all duration-300 md:hover:scale-105 group decoration-transparent"
-      title={`Name: ${product.name} \nPrice: ${product.price} ₫ \nRating: ${product.ratings} ★`}
+      title={`Name: ${product.name} \nPrice: ${(product.price).toLocaleString()} VND \nRating: ${product.ratings} ★`}
     >
       <div className="h-fit overflow-hidden p-2">
         <img
@@ -35,8 +36,7 @@ const ProductCard = ({ product }) => {
         <p className="text-secondaryDark font-bold text-md capitalize line-clamp-2">
           {product.name}
         </p>
-
-        <span className="text-red-600 font-semibold">{product.price} ₫</span>
+        <CurrencyFormat value={product.price} displayType={'text'} thousandSeparator={true} renderText={value => <div>{value} VND</div>} />         
       </div>
     </Link>
   );

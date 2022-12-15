@@ -85,7 +85,7 @@ const Payment = () => {
         alert.error(result.error.message);
       } else {
         if (result.paymentIntent.status === 'succeeded') {
-          alert.success(`Bạn đã thanh toán thành công số tiền ${order.totalPrice} ₫}`);
+          alert.success(`Bạn đã thanh toán thành công số tiền ${(order.totalPrice).toLocaleString()} VND}`);
           // creating order when payment is success
           order.paymentInfo = {
             id: result.paymentIntent.id,
@@ -167,7 +167,7 @@ const Payment = () => {
               value={
                 loading
                   ? `Processing...`
-                  : `Thanh toán - ${orderInfo && orderInfo.totalPrice} ₫`
+                  : `Thanh toán - ${orderInfo && (orderInfo.totalPrice).toLocaleString()} VND`
               }
             />
           </form>

@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import CurrencyFormat from 'react-currency-format';
 
 const CartItemCard = ({ item, deleteCartItems }) => {
   return (
@@ -16,7 +17,7 @@ const CartItemCard = ({ item, deleteCartItems }) => {
         >
           {item.name}
         </Link>
-        <span className="text-slate-600">{`Price: ${item.price} ₫`}</span>
+          <CurrencyFormat value={item.price} displayType={'text'} thousandSeparator={true} prefix="Giá: " renderText={value => <div>{value} VND</div>} />         
         <p
           onClick={() => deleteCartItems(item.product)}
           className="bg-red-300 w-[150px] hover:bg-red-400 hover:shadow-lg transition-all duration-500 text-white cursor-pointer py-[0.1em] rounded-md text-center mt-2"
