@@ -109,8 +109,7 @@ exports.updateOrder = catchAsyncErrors(async (req, res, next) => {
     }
 
   }
-
-  if (req.body.status === 'Cancel') {
+  else if (req.body.status === 'Cancel') {
     order.orderItems.forEach(async (order_) => {
       await updateStock_increase(order_.product, order_.quantity);
     });
