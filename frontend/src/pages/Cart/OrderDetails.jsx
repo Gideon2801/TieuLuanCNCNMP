@@ -5,7 +5,6 @@ import { Link, useParams } from "react-router-dom";
 import { getOrderDetails, clearErrors, cancelOrder } from "../../actions/orderAction";
 import Loader from "../../components/layout/Loader/Loader";
 import { useAlert } from "react-alert";
-import Button from '../../components/user/Button';
 import { UPDATE_ORDER_RESET } from '../../constants/orderConstants';
 
 const OrderDetails = () => {
@@ -19,7 +18,7 @@ const OrderDetails = () => {
     isUpdated,
   } = useSelector((state) => state.order);
 
-  const [status, setStatus] = useState('Cancel');
+  const [status] = useState('Cancel');
 
   const updateStatussOrder = (e) => {
     e.preventDefault();
@@ -58,7 +57,7 @@ const OrderDetails = () => {
         <Fragment>
           <MetaData title={`Chi tiết đơn hàng`} />
 
-          <div className="h-auto py-24">
+          <div className="h-auto pt-40 pb-10">
             <div className="w-[90%] mx-auto">
               <div>
                 <p className="heading">Thông tin giao hàng</p>
@@ -175,10 +174,12 @@ const OrderDetails = () => {
               </div>
             </div>
           </div>
-          {order.orderStatus == 'Processing' && (
-            <form onSubmit={updateStatussOrder}>
-              <Button id="btn-signup" label="Hủy đơn hàng"
-            />
+          {order.orderStatus === 'Processing' && (
+            <form className="flex justify-center content-center mb-20" onSubmit={updateStatussOrder}>
+              <button
+              className="bg-red-600 px-5 py-2 text-white rounded-md hover:scale-105 transition-all duration-500">
+              Hủy đơn hàng
+              </button>
             </form>
            
           )}

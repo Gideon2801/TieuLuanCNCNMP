@@ -85,11 +85,13 @@ const Payment = () => {
         alert.error(result.error.message);
       } else {
         if (result.paymentIntent.status === 'succeeded') {
+          alert.success(`Bạn đã thanh toán thành công số tiền ${order.totalPrice} ₫}`);
           // creating order when payment is success
           order.paymentInfo = {
             id: result.paymentIntent.id,
             status: result.paymentIntent.status,
           };
+          
           dispatch(createOrder(order));
           navigate('/success', { replace: true });
           dispatch(resetCart());
@@ -158,7 +160,7 @@ const Payment = () => {
 
             <input
               // onClick={dispatch(resetCart())}
-              className="slideableBtnStyles cursor-pointer"
+              className="slideableBtnStyles cursor-pointer mt-5"
               ref={payBtn}
               type="submit"
               disabled={loading ? true : false}
@@ -171,7 +173,7 @@ const Payment = () => {
           </form>
         </div>
         <div className="w-full md:w-[30%] mx-auto">
-            <form className="flex flex-col gap-5"
+            <form className="flex gap-1 mt-5 "
             onSubmit={(e) => submitWithoutPay(e)}>
               <input
                 // onClick={dispatch(resetCart())}

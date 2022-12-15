@@ -38,15 +38,17 @@ exports.loginUser = catchAsyncErrors(async (req, res, next) => {
   if (!email || !password) {
     return next(new ErrorHandler("Vui lòng nhập Email và mật khẩu", 400));
   }
+  
 
   // kiểm tra email và password trong DB
   // dùng select vì mật khẩu đã hash nên kh thể nhìn
   const user = await User.findOne({ email }).select("+password");
-
+  
   // nếu không tìm thấy user trong DB
   if (!user) {
     return next(new ErrorHandler("Email hoặc mật khẩu không chính xác", 401));
   }
+ 
 
   // kiểm tra password có khớp với DB không bằng comparePassword method
   const isPasswordMatched = await user.comparePassword(password);
@@ -55,6 +57,7 @@ exports.loginUser = catchAsyncErrors(async (req, res, next) => {
   if (!isPasswordMatched) {
     return next(new ErrorHandler("Email hoặc mật khẩu không chính xác", 401));
   }
+  
 
   sendToken(user, 200, res, "Đăng nhập thành công");
 });
@@ -99,7 +102,7 @@ exports.forgotPassword = catchAsyncErrors(async (req, res, next) => {
     // gửi email cho người dùng sau khi gửi mã thông báo
     await sendEmail({
       email: user.email,
-      subject: `G10 Store Password Recovery`,
+      subject: `G101 Store Password Recovery`,
       message,
     });
 
